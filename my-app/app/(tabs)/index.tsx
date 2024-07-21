@@ -1,36 +1,64 @@
-import { Image, StyleSheet, Platform, Button } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Image, StyleSheet, Platform, Button, TextInput } from 'react-native';
 import { View, Text, ScrollView} from 'react-native';
 import { useState } from 'react';
+import Task from '../components/task';
 
 export default function HomeScreen() {
-  const [tasks, setTasks] = useState(['']); 
-  const [completed, setCompleted] = useState(['']); 
+  const [tasks, setTasks] = useState<Array<{ description: string; title: string }>>([]);
+  const [completedTasks, setCompletedTasks] = useState<JSX.Element[]>([]);
+
+  const [isAddingTask, setIsAddingTask] = useState(false);
+  const [newTaskTitle, setNewTaskTitle] = useState('');
+  const [newTaskDescription, setNewTaskDescription] = useState('');
+
+  const handleAddTask = () => {
+    setIsAddingTask(true);
+  };
+
 
   const makeTask = () => {
-    const task = "hi" 
-    setTasks([...tasks, task]); 
+    const newTask = { description: newTaskDescription, title: newTaskTitle };
+    setTasks([...tasks, newTask]);
+    setIsAddingTask(false);
+    setNewTaskTitle('');
+    setNewTaskDescription('');
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>My Tasks</Text>
-      <Button
-        onPress={makeTask}
+      {isAddingTask ? (
+        <View>
+          <TextInput
+          placeholder='Title'
+          value={newTaskTitle}
+          onChangeText={setNewTaskTitle}
+          />
+          <TextInput
+          placeholder='Description'
+          value={newTaskDescription}
+          onChangeText={setNewTaskDescription}
+          />
+          <Button
+            onPress={makeTask}
+            title='Save Task'
+          />
+        </View>
+      ) : (
+        <Button
+        onPress={handleAddTask}
         title="Create New Task"
         color='#841584'
       />
+      )}
       <ScrollView>
-      { tasks?.map(function (item, index) { return ( 
-              <Text key={index} >
-               {item}
-              </Text> 
-              )})
-            }
+      {tasks.map((task, index) => (
+          <Task 
+            key={index}
+            description={task.description}
+            title={task.title}
+          />
+        ))}
       </ScrollView>
     </View>
   );
@@ -41,17 +69,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
   },
   container: {
     flex: 1,
