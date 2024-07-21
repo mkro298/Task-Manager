@@ -15,3 +15,12 @@ when a user clicks uncomplete, it moves to the end of the uncompleted tasks
 when a task is deleted, a line is drawn through it and it exists from the screen - (option for 5 seconds to undo)
 add a new task button at the top, opens and allows you to write down the type of task and description 
 three dots on corner of task to delete or edit 
+
+
+tasks: 
+- create task button 
+- create a task section (enter text)
+- tasks + completed tasks sections
+- completing a task option 
+- uncompleting a task option 
+- deleting a task 
