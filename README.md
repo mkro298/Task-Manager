@@ -24,3 +24,4 @@ tasks:
 - completing a task option 
 - uncompleting a task option 
 - deleting a task 
+- tweak UI
