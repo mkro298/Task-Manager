@@ -5,7 +5,7 @@ import Task from '../components/task';
 
 export default function HomeScreen() {
   const [tasks, setTasks] = useState<Array<{ description: string; title: string }>>([]);
-  const [completedTasks, setCompletedTasks] = useState<JSX.Element[]>([]);
+  const [completedTasks, setCompletedTasks] = useState<Array<{ description: string; title: string }>>([]);
 
   const [isAddingTask, setIsAddingTask] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
@@ -15,10 +15,33 @@ export default function HomeScreen() {
     setIsAddingTask(true);
   };
 
+  const handleDelete = (index: number) => {
+    const taskToDelete = tasks[index]; 
+    setTasks(tasks.filter((_, i) => i !== index));
+  }
+
+  const handleCDelete = (index: number) => {
+    const taskToDelete = completedTasks[index]; 
+    setCompletedTasks(completedTasks.filter((_, i) => i !== index));
+  }
+
+  const handleCompleteTask = (index: number) => {
+    const taskToComplete = tasks[index];
+    setTasks(tasks.filter((_, i) => i !== index));
+    setCompletedTasks([...completedTasks, taskToComplete]);
+  };
+
+  const handleUncompleteTask = (index: number) => {
+    const taskToComplete = completedTasks[index];
+    setCompletedTasks(completedTasks.filter((_, i) => i !== index));
+    setTasks([...tasks, taskToComplete]);
+  };
 
   const makeTask = () => {
-    const newTask = { description: newTaskDescription, title: newTaskTitle };
-    setTasks([...tasks, newTask]);
+    if (newTaskTitle != '' || newTaskDescription != '') {
+      const newTask = { description: newTaskDescription, title: newTaskTitle };
+      setTasks([...tasks, newTask]);
+    }
     setIsAddingTask(false);
     setNewTaskTitle('');
     setNewTaskDescription('');
@@ -51,13 +74,28 @@ export default function HomeScreen() {
         color='#841584'
       />
       )}
+      <Text>Tasks</Text>
       <ScrollView>
       {tasks.map((task, index) => (
           <Task 
-            key={index}
-            description={task.description}
-            title={task.title}
-          />
+          key={index}
+          description={task.description}
+          title={task.title}
+          onComplete={() => handleCompleteTask(index)}
+          onDelete={() => handleDelete(index)}
+        />
+        ))}
+      </ScrollView>
+      <Text>Completed Tasks</Text>
+      <ScrollView>
+      {completedTasks.map((task, index) => (
+          <Task 
+          key={index}
+          description={task.description}
+          title={task.title}
+          onComplete={() => handleUncompleteTask(index)}
+          onDelete={() => handleCDelete(index)}
+        />
         ))}
       </ScrollView>
     </View>

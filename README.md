@@ -18,10 +18,4 @@ three dots on corner of task to delete or edit
 
 
 tasks: 
-- create task button 
-- create a task section (enter text)
-- tasks + completed tasks sections
-- completing a task option 
-- uncompleting a task option 
-- deleting a task 
 - tweak UI

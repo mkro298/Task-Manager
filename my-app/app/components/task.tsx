@@ -9,6 +9,8 @@ import { useState } from 'react';
 interface TaskProps {
     description: string;
     title: string; 
+    onComplete: () => void;
+    onDelete: () => void;
 }
 
 const Task: React.FC<TaskProps> = (props) => {
@@ -16,6 +18,17 @@ const Task: React.FC<TaskProps> = (props) => {
     return (
       <View style={styles.taskContainer}>
         <Text style={styles.title}>{props.title}</Text>
+        <Text style={styles.description}>{props.description}</Text>
+        <Button
+        onPress={props.onComplete}
+        title="O"
+        color='#841584'
+        />
+        <Button
+        onPress={props.onDelete}
+        title=":"
+        color='#841584'
+        />
       </View>
     );
   }
@@ -32,7 +45,6 @@ const styles = StyleSheet.create({
       },
       description: {
         fontSize: 16,
-        fontWeight: 'bold'
       },
 });
 
