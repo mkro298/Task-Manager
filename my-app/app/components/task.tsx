@@ -12,6 +12,7 @@ interface TaskProps {
     title: string; 
     onComplete: () => void;
     onDelete: () => void;
+    onEdit: () => void, 
     done: boolean; 
 }
 
@@ -29,8 +30,10 @@ const Task: React.FC<TaskProps> = (props) => {
         </TouchableOpacity>
         )}
         <View style={styles.text}>
+        <TouchableOpacity onPress={props.onEdit}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.description}>{props.description}</Text>
+        </TouchableOpacity>
         </View>
        <TouchableOpacity onPress={props.onDelete} style={styles.delete}>
         <Icon name="delete" size={20} color="black" />

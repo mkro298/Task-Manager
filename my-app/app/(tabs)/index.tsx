@@ -10,9 +10,47 @@ export default function HomeScreen() {
   const [completedTasks, setCompletedTasks] = useState<Array<{ description: string; title: string }>>([]);
 
   const [isAddingTask, setIsAddingTask] = useState(false);
+  const [editing, setEditing] = useState(false); 
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskDescription, setNewTaskDescription] = useState('');
-
+  const [index, setIndex] = useState(0); 
+  const [isComplete, setIsComplete] = useState(false); 
+ 
+  const editTask = (index: number) => {
+    const taskToEdit = tasks[index]; 
+    setEditing(true)
+    setNewTaskTitle(taskToEdit.title)
+    setNewTaskDescription(taskToEdit.description)
+    setIndex(index) 
+    setIsComplete(false)
+  }
+  const editCTask = (index: number) => {
+    const taskToEdit = completedTasks[index]; 
+    setEditing(true)
+    setNewTaskTitle(taskToEdit.title)
+    setNewTaskDescription(taskToEdit.description)
+    setIndex(index) 
+    setIsComplete(true)
+  }
+  //need a way to edit the task such that when we edit the field - we can save that field to the new task 
+  //save in place? or add to end 
+  const saveEditTask = (index: number, isComplete: boolean) => {
+    if (isComplete) {
+      const task = completedTasks[index]; 
+      task.description = newTaskDescription; 
+      task.title = newTaskTitle; 
+    } else {
+      const task = tasks[index]; 
+      task.description = newTaskDescription; 
+      task.title = newTaskTitle; 
+    }
+    setIsAddingTask(false);
+    setNewTaskTitle('');
+    setNewTaskDescription('');
+    setEditing(false)
+    setIndex(0)
+    setIsComplete(false)
+  }
   const handleAddTask = () => {
     setIsAddingTask(true);
   };
@@ -50,8 +88,29 @@ export default function HomeScreen() {
   };
 
   return (
+    //how to save the index 
     <View style={styles.container}>
       <Text style={styles.text}>My Tasks</Text>
+        <Modal isVisible={editing}>
+          <View style={styles.modalContainer}>
+          <TextInput
+          placeholder='Task'
+          value={newTaskTitle}
+          onChangeText={setNewTaskTitle}
+          style={styles.input}
+          />
+          <TextInput
+          placeholder='Description'
+          value={newTaskDescription}
+          onChangeText={setNewTaskDescription}
+          style={styles.input}
+          />
+          <Button
+             onPress={() => saveEditTask(index, isComplete)}
+              title='Save Task'
+          />
+        </View>
+        </Modal>
       {isAddingTask ? (
       <Modal isVisible={true}>
         <View style={styles.modalContainer}>
@@ -89,6 +148,7 @@ export default function HomeScreen() {
             title={task.title}
             onComplete={() => handleCompleteTask(index)}
             onDelete={() => handleDelete(index)}
+            onEdit={() => editTask(index)}
             done={false}
           />
         ))}
@@ -102,6 +162,7 @@ export default function HomeScreen() {
             title={task.title}
             onComplete={() => handleUncompleteTask(index)}
             onDelete={() => handleCDelete(index)}
+            onEdit={() => editCTask(index)}
             done={true}
           />
         ))}
