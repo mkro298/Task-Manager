@@ -1,6 +1,6 @@
 # chapterOne
 
-App Features:
+App Requirements:
 - Add Task: Users can add a new task with a brief description.
 - Mark Task as Complete: Users can mark tasks as complete, which visually distinguishes them from incomplete tasks.
 - Delete Task: Users can delete a task from the list.
@@ -17,3 +17,10 @@ npm install react-native-vector-icons
 ```
 
 ## App Overview 
+
+Features: 
+- There are two sections - uncompleted and completed tasks 
+- There is a create task button at the top that when clicked, prompts the user to give the name of the task and a short description (which can be optional) 
+- Tasks are automatically saved to the uncompleted sections, but when the checkmark is clicked and the task is marked as completed, it will be moved to the completed section 
+- The trash button can be used to delete a task 
+- When a task is clicked on, its name and and description can be edited 
