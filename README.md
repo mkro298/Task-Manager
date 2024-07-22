@@ -8,4 +8,5 @@ App Features:
 
 
 tasks: 
-- able to edit the task once you click on it (pop up modal again but with filled sections based on props)
+- clean code 
+- add comments 
