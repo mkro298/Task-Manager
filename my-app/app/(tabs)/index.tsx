@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform, Button, TextInput, TouchableOpacity  } from 'react-native';
+import { StyleSheet, Button, TextInput, TouchableOpacity  } from 'react-native';
 import { View, Text, ScrollView} from 'react-native';
 import { useState } from 'react';
 import Task from '../components/task';
@@ -11,6 +11,7 @@ export default function HomeScreen() {
 
   const [isAddingTask, setIsAddingTask] = useState(false);
   const [editing, setEditing] = useState(false); 
+
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskDescription, setNewTaskDescription] = useState('');
   const [index, setIndex] = useState(0); 
@@ -32,8 +33,6 @@ export default function HomeScreen() {
     setIndex(index) 
     setIsComplete(true)
   }
-  //need a way to edit the task such that when we edit the field - we can save that field to the new task 
-  //save in place? or add to end 
   const saveEditTask = (index: number, isComplete: boolean) => {
     if (isComplete) {
       const task = completedTasks[index]; 
@@ -88,7 +87,6 @@ export default function HomeScreen() {
   };
 
   return (
-    //how to save the index 
     <View style={styles.container}>
       <Text style={styles.text}>My Tasks</Text>
         <Modal isVisible={editing}>
@@ -200,13 +198,6 @@ const styles = StyleSheet.create({
     width: 300, 
     marginLeft: 35, 
   },
-  saveButton: {
-    backgroundColor: '#4CAF50',
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-    marginBottom: 20,
-  },
   buttonText: {
     color: 'black',
     fontSize: 20,
@@ -225,6 +216,4 @@ const styles = StyleSheet.create({
     marginLeft: 30, 
     fontSize: 16, 
   }, 
-  scrollView: {
-  },
 });
