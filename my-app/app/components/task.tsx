@@ -1,22 +1,19 @@
-import { Image, StyleSheet, Platform, Button, View, Text, ScrollView , TouchableOpacity} from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { useState } from 'react';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
+//properites for each task, passes in methods used for when marking tasks as complete, deleted, or when editing
 interface TaskProps {
     description: string;
     title: string; 
     onComplete: () => void;
     onDelete: () => void;
+    onEdit: () => void, 
     done: boolean; 
 }
 
 const Task: React.FC<TaskProps> = (props) => {
 
+  //displays different images based on if task is in completed section or not 
     return (
       <View style={styles.taskContainer}>
         {props.done ? (
@@ -29,8 +26,10 @@ const Task: React.FC<TaskProps> = (props) => {
         </TouchableOpacity>
         )}
         <View style={styles.text}>
+        <TouchableOpacity onPress={props.onEdit}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.description}>{props.description}</Text>
+        </TouchableOpacity>
         </View>
        <TouchableOpacity onPress={props.onDelete} style={styles.delete}>
         <Icon name="delete" size={20} color="black" />

@@ -5,7 +5,3 @@ App Features:
 - Mark Task as Complete: Users can mark tasks as complete, which visually distinguishes them from incomplete tasks.
 - Delete Task: Users can delete a task from the list.
 - Task List: Display all tasks in a list view, showing both complete and incomplete tasks.
-
-
-tasks: 
-- able to edit the task once you click on it (pop up modal again but with filled sections based on props)
