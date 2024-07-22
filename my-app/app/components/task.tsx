@@ -1,6 +1,7 @@
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
+//properites for each task, passes in methods used for when marking tasks as complete, deleted, or when editing
 interface TaskProps {
     description: string;
     title: string; 
@@ -12,6 +13,7 @@ interface TaskProps {
 
 const Task: React.FC<TaskProps> = (props) => {
 
+  //displays different images based on if task is in completed section or not 
     return (
       <View style={styles.taskContainer}>
         {props.done ? (
