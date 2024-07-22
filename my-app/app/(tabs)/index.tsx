@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   createButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#eff6fa',
+    backgroundColor: '#e2eff6',
     padding: 10,
     borderRadius: 5,
     justifyContent: 'center',
