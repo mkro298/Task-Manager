@@ -1,5 +1,0 @@
-react-native-modal
---save-dev @types/react-native-vector-icons
-react-native-vector-icons
--g expo-cli   
--g create-expo-app     
