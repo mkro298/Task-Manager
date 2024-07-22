@@ -8,5 +8,4 @@ App Features:
 
 
 tasks: 
-- clean code 
 - add comments 
