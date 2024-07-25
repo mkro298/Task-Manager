@@ -17,6 +17,14 @@ npm install react-native-modal
 npm install react-native-vector-icons
 ```
 
+In order to run the app use 
+
+
+```
+cd my-app
+npm run ios 
+```
+
 ## App Overview 
 
 Features: 
