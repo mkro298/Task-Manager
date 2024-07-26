@@ -1,4 +1,4 @@
-# chapterOne
+# Task-Manager
 
 App Requirements:
 - Add Task: Users can add a new task with a brief description.
